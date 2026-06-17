@@ -15,12 +15,12 @@ public class GamePanel extends JPanel {
     public GamePanel(Level level) {
         this.level = level;
         setBackground(Color.WHITE);
-        wallImg = new ImageIcon("wall.png").getImage();
-        targetImg = new ImageIcon("target.png").getImage();
-        boxImg = new ImageIcon("box.jpg").getImage();
-        stickyBoxImg = new ImageIcon("box.jpg").getImage();
-        playerImg = new ImageIcon("player.png").getImage();
-        emptyImg = new ImageIcon("empty.png").getImage();
+        wallImg = new ImageIcon("resources/Wall.png").getImage();
+        targetImg = new ImageIcon("resources/target.png").getImage();
+        boxImg = new ImageIcon("resources/box.jpg").getImage();
+        stickyBoxImg = new ImageIcon("resources/box.jpg").getImage();
+        playerImg = new ImageIcon("resources/Player.png").getImage();
+        emptyImg = new ImageIcon("resources/empty.png").getImage();
     }
 
     @Override
