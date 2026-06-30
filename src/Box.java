@@ -15,6 +15,7 @@ public class Box {
         return y;
     }
     
+    //设置箱子位置
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;

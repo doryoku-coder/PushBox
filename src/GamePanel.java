@@ -3,22 +3,23 @@ import java.awt.*;
 import java.util.List;
 
 public class GamePanel extends JPanel {
-    private Image wallImg;
-    private Image targetImg;
-    private Image boxImg;
-    private Image stickyBoxImg;
-    private Image playerImg;
-    private Image emptyImg;
+    private final Image wallImg;
+    private final  Image targetImg;
+    private final Image boxImg;
+    private final Image stickyBoxImg;
+    private final Image playerImg;
+    private final Image emptyImg;
     private Level level;
     public static final int CELL_SIZE = 99;
     
+
     public GamePanel(Level level) {
         this.level = level;
         setBackground(Color.WHITE);
         wallImg = new ImageIcon("resources/Wall.png").getImage();
         targetImg = new ImageIcon("resources/target.png").getImage();
         boxImg = new ImageIcon("resources/box.jpg").getImage();
-        stickyBoxImg = new ImageIcon("resources/box.jpg").getImage();
+        stickyBoxImg = new ImageIcon("resources/StickyBox.png").getImage();
         playerImg = new ImageIcon("resources/Player.png").getImage();
         emptyImg = new ImageIcon("resources/empty.png").getImage();
     }
@@ -66,6 +67,7 @@ public class GamePanel extends JPanel {
         repaint();
     }
 
+    //调节面板大小
     @Override
     public Dimension getPreferredSize() {
         char[][] map = level.getMap().getData();

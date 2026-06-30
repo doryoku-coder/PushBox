@@ -7,6 +7,7 @@ public class Map {
     public static final char EMPTY = ' ';
     private char[][][] allMaps;
     private char[][] currentMap;
+
     public Map(){
         allMaps = new char[5][][];
         allMaps[0] = new char[][]{
@@ -56,17 +57,22 @@ public class Map {
         };
         currentMap = allMaps[0];
     }
+
     public void loadLevel(int levelNum) {
         if(levelNum >= 0 && levelNum < allMaps.length){
             currentMap = allMaps[levelNum];
         }
     }
+
+    //返回地图坐标
     public char getCoordinate(int x, int y) {
         return currentMap[x][y];
     }
+
     public boolean isWall(int x, int y) {
         return getCoordinate(x, y) == WALL;
     }
+
     public char[][] getData() {
         return currentMap;
     }

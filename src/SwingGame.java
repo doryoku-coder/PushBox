@@ -21,6 +21,7 @@ public class SwingGame extends JFrame {
                 if (key == KeyEvent.VK_W) {
                     doPlayerMove(-1, 0);
                 }
+
                 if (key == KeyEvent.VK_S) {
                     doPlayerMove(1, 0);
                 }
@@ -28,12 +29,15 @@ public class SwingGame extends JFrame {
                 if (key == KeyEvent.VK_A) {
                     doPlayerMove(0, -1);
                 }
+
                 if (key == KeyEvent.VK_D) {
                     doPlayerMove(0, 1);
                 }
+
                 if (key == KeyEvent.VK_R) {
                     restartLevel();
                 }
+
                 if (key == KeyEvent.VK_M) {
                     backToMenu();
                 }

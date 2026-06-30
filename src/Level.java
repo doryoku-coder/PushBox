@@ -14,7 +14,7 @@ public class Level {
         boxList = new ArrayList<>();
         initLevel();
     }
-    
+    //初始化关卡
     private void initLevel() {
         char[][] data = map.getData();
         for (int i = 0; i < data.length; i++) {
@@ -35,7 +35,7 @@ public class Level {
             }
         }
     }
-    
+    //判断是否有箱子
     public boolean hasBox(int x, int y) {
         for (Box box : boxList) {
             if (box.getX() == x && box.getY() == y) {
@@ -44,7 +44,7 @@ public class Level {
         }
         return false;
     }
-    
+    //获取箱子坐标
     public Box getBoxAt(int x, int y) {
         for (Box box : boxList) {
             if (box.getX() == x && box.getY() == y) {
