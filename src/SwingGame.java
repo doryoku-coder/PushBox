@@ -47,54 +47,69 @@ public class SwingGame extends JFrame {
     }
 
     public void startGame(int levelNum) {
-        currentLevel = levelNum;
-        level = new Level(currentLevel);
-        panel = new GamePanel(level);
-        getContentPane().add(panel);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        requestFocus();
-    }
-
-    private void doPlayerMove(int dx, int dy) {
-        Player p = level.getPlayer();
-        int nx = p.getX() + dx;
-        int ny = p.getY() + dy;
-        
-        if (level.getMap().isWall(nx, ny)) return;
-        
-        if (level.hasBox(nx, ny)) {
-            Box box = level.getBoxAt(nx, ny);
-            if (level.isStickyBox(box)) {
-                StickyBox stickyBox = (StickyBox) box;
-                if (stickyBox.canMoveGroup(dx, dy, level.getMap(), level.getBoxList())) {
-                    stickyBox.moveGroup(dx, dy, level.getBoxList());
-                    p.move(dx, dy);
-                }
-            } else {
-                int nnx = nx + dx;
-                int nny = ny + dy;
-                if (!level.getMap().isWall(nnx, nny) && !level.hasBox(nnx, nny)) {
-                    box.setPosition(nnx, nny);
-                    p.move(dx, dy);
-                }
-            }
-        } else {
-            p.move(dx, dy);
-        }
-        
-        panel.repaint();
-        
-        if (level.isWin()) {
-            JOptionPane.showMessageDialog(this, "恭喜通关！");
+        try {
+            currentLevel = levelNum;
+            level = new Level(currentLevel);
+            panel = new GamePanel(level);
+            getContentPane().add(panel);
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "游戏启动失败：" + e.getMessage());
             backToMenu();
         }
     }
 
+    private void doPlayerMove(int dx, int dy) {
+        try {
+            Player p = level.getPlayer();
+            int nx = p.getX() + dx;
+            int ny = p.getY() + dy;
+            
+            if (nx >= 0 && ny >= 0) {
+                if (level.getMap().isWall(nx, ny)) return;
+                
+                if (level.hasBox(nx, ny)) {
+                    Box box = level.getBoxAt(nx, ny);
+                    if (level.isStickyBox(box)) {
+                        StickyBox stickyBox = (StickyBox) box;
+                        if (stickyBox.canMoveGroup(dx, dy, level.getMap(), level.getBoxList())) {
+                            stickyBox.moveGroup(dx, dy, level.getBoxList());
+                            p.move(dx, dy);
+                        }
+                    } else {
+                        int nnx = nx + dx;
+                        int nny = ny + dy;
+                        if (!level.getMap().isWall(nnx, nny) && !level.hasBox(nnx, nny)) {
+                            box.setPosition(nnx, nny);
+                            p.move(dx, dy);
+                        }
+                    }
+                } else {
+                    p.move(dx, dy);
+                }
+                
+                panel.repaint();
+                
+                if (level.isWin()) {
+                    JOptionPane.showMessageDialog(this, "恭喜通关！");
+                    backToMenu();
+                }
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "操作失败：" + e.getMessage());
+        }
+    }
+
     private void restartLevel() {
-        level = new Level(currentLevel);
-        panel.updateLevel(level);
+        try {
+            level = new Level(currentLevel);
+            panel.updateLevel(level);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "重新加载关卡失败：" + e.getMessage());
+        }
     }
 
     private void backToMenu() {

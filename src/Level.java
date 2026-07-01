@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import exceptions.BoxMoveException;
 
 public class Level {
     private Map map;
@@ -59,6 +60,9 @@ public class Level {
     }
     
     public void moveBox(Box box, int dx, int dy) {
+        if (box == null) {
+            throw new BoxMoveException("箱子对象不能为空！");
+        }
         if (box instanceof StickyBox) {
             StickyBox stickyBox = (StickyBox) box;
             if (stickyBox.canMoveGroup(dx, dy, map, boxList)) {

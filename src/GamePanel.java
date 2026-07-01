@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+//导入自定义异常包
+import exceptions.ResourceLoadException;
 
 public class GamePanel extends JPanel {
     private final Image wallImg;
@@ -16,12 +18,42 @@ public class GamePanel extends JPanel {
     public GamePanel(Level level) {
         this.level = level;
         setBackground(Color.WHITE);
-        wallImg = new ImageIcon("resources/Wall.png").getImage();
-        targetImg = new ImageIcon("resources/target.png").getImage();
-        boxImg = new ImageIcon("resources/box.jpg").getImage();
-        stickyBoxImg = new ImageIcon("resources/StickyBox.png").getImage();
-        playerImg = new ImageIcon("resources/Player.png").getImage();
-        emptyImg = new ImageIcon("resources/empty.png").getImage();
+        
+        ImageIcon wallIcon = new ImageIcon("resources/Wall.png");
+        if (wallIcon.getIconWidth() == -1) {
+            throw new ResourceLoadException("图片资源加载失败：resources/Wall.png");
+        }
+        wallImg = wallIcon.getImage();
+        
+        ImageIcon targetIcon = new ImageIcon("resources/target.png");
+        if (targetIcon.getIconWidth() == -1) {
+            throw new ResourceLoadException("图片资源加载失败：resources/target.png");
+        }
+        targetImg = targetIcon.getImage();
+        
+        ImageIcon boxIcon = new ImageIcon("resources/box.jpg");
+        if (boxIcon.getIconWidth() == -1) {
+            throw new ResourceLoadException("图片资源加载失败：resources/box.jpg");
+        }
+        boxImg = boxIcon.getImage();
+        
+        ImageIcon stickyBoxIcon = new ImageIcon("resources/StickyBox.png");
+        if (stickyBoxIcon.getIconWidth() == -1) {
+            throw new ResourceLoadException("图片资源加载失败：resources/StickyBox.png");
+        }
+        stickyBoxImg = stickyBoxIcon.getImage();
+        
+        ImageIcon playerIcon = new ImageIcon("resources/Player.png");
+        if (playerIcon.getIconWidth() == -1) {
+            throw new ResourceLoadException("图片资源加载失败：resources/Player.png");
+        }
+        playerImg = playerIcon.getImage();
+        
+        ImageIcon emptyIcon = new ImageIcon("resources/empty.png");
+        if (emptyIcon.getIconWidth() == -1) {
+            throw new ResourceLoadException("图片资源加载失败：resources/empty.png");
+        }
+        emptyImg = emptyIcon.getImage();
     }
 
     @Override

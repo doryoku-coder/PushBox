@@ -1,3 +1,6 @@
+import exceptions.CoordinateException;
+import exceptions.LevelLoadException;
+
 public class Map {
     public static final char WALL = '#';
     public static final char BOX = 'B';
@@ -61,11 +64,16 @@ public class Map {
     public void loadLevel(int levelNum) {
         if(levelNum >= 0 && levelNum < allMaps.length){
             currentMap = allMaps[levelNum];
+        } else {
+            throw new LevelLoadException("关卡编号 " + levelNum + " 无效。有效范围是 0-" + (allMaps.length - 1));
         }
     }
 
     //返回地图坐标
     public char getCoordinate(int x, int y) {
+        if (x < 0 || x >= currentMap.length || y < 0 || y >= currentMap[0].length) {
+            throw new CoordinateException("坐标 (" + x + "," + y + ") 超出地图范围！");
+        }
         return currentMap[x][y];
     }
 
